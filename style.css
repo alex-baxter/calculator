@@ -1,0 +1,44 @@
+#calccontainer {
+    margin-top: 10%;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 500px;
+    height: 500px;
+}
+
+#historybox {
+    text-align: right;
+    background-color: rgb(233, 233, 233);
+    padding: 0px;
+    margin: 10px 10px 10px 150px;
+    font-size: 12px;
+}
+
+#numberbox {
+    text-align: right;
+    background-color: rgb(233, 233, 233);
+    padding: 0px;
+    margin: 10px 10px 10px 50px;
+    font-size: 20px;
+}
+
+p {
+    margin: 5px 0px 5px 0px;
+}
+
+#inputbox {
+    margin: auto;
+    padding-top: auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 450px;
+}
+
+button {
+    height: 75px;
+}
+
+.opbut {
+    background-color: rgb(202, 202, 202);
+}

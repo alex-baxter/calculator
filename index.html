@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel=stylesheet href="style.css">
+    <title>CALCULATOR</title>
+    <style>
+      
+    </style>
+    
+  </head>
+
+  <body>
+    <div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="container" id="calccontainer">
+            <div class="row" id="historybox"><p id="historyField">History box</p></div>
+            <div class="row" id="numberbox"><p id="displayField">Entry Box</p></div>
+            <div class="row" id="inputbox">
+                <button class="inbut" id="but7">7</button>
+                <button class="inbut" id="but8">8</button>
+                <button class="inbut" id="but9">9</button>
+                <button class="opbut" id="delbut">DEL</button>
+                <button class="opbut" id="clearbut">C</button>
+                <button class="inbut" id="but4">4</button>
+                <button class="inbut" id="but5">5</button>
+                <button class="inbut" id="but6">6</button>
+                <button class="opbut" id="multbut">x</button>
+                <button class="opbut" id="divbut">÷</button>
+                <button class="inbut" id="but1">1</button>
+                <button class="inbut" id="but2">2</button>
+                <button class="inbut" id="but3">3</button>
+                <button class="opbut" id="plusbut">+</button>
+                <button class="opbut" id="minusbut">-</button>
+                <div></div>
+                <button class="inbut" id="but0">0</button>
+                <div></div>
+                <div></div>
+                <button class="opbut" id="equalbut">=</button>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  </body>
+  
+  
+  <script>
+    
+    let num1 = 0;
+    let num2 = 0;
+    let result = 0;
+    let displayValue = "-";
+    let historyText = "";
+    let operator = "";
+    let opFresh = true;
+    const displayMain = document.getElementById("displayField");
+    const displayHistory = document.getElementById("historyField");
+
+    function add() {
+        result = num1 + num2;
+        return result;
+    }
+
+    function subtract() {
+        result = num2 - num1;
+        return result;
+    }
+
+    function multiply() {
+        result = num1 * num2;
+        return result;
+    }
+
+    function divide() {
+        result = num2 / num1;
+        return result;
+    }
+
+    function operate() {
+        if (operator === '+') {
+            add()
+        }
+        else if (operator === '-') {
+            subtract()
+        }
+        else if (operator === '÷') {
+            divide()
+        }
+        else if (operator === 'x') {
+            multiply()
+        }
+        else {
+            result = num1;
+        }
+        displayHistory.innerHTML = num2 + ' ' + operator + ' ' + num1;
+        displayMain.innerHTML = result;
+        num1 = result;
+        num2 = 0;
+        opFresh = true;
+    }
+
+    function updateDisplay() {
+        if (num2 === 0) {displayMain.innerHTML = num1}
+            else {
+                displayMain.innerHTML = num2 + ' ' + operator + ' ' + num1
+            }
+    }
+
+    function digitAdded(inNum) {
+        if (opFresh === true) {
+            num1 = inNum;
+            }
+        else {
+            num1 = num1 + inNum.toString();
+            num1 = parseInt(num1);
+        }
+        opFresh = false;
+        updateDisplay();
+    }
+
+    function operatorSelected(input) {
+        if (num1 != 0 && num2 != 0) {operate()};
+        operator = input;
+        num2 = num1;
+        num1 = 0;
+        updateDisplay();
+    }
+
+    function clearInput() {
+        num1 = 0;
+        num2 = 0;
+        operator = '';
+        displayHistory.innerHTML = 'Prev.';
+        updateDisplay();
+    }
+
+
+
+
+    document.querySelector('#but0').addEventListener('click', function (){digitAdded(0)});
+    document.querySelector('#but1').addEventListener('click', function (){digitAdded(1)});
+    document.querySelector('#but2').addEventListener('click', function (){digitAdded(2)});
+    document.querySelector('#but3').addEventListener('click', function (){digitAdded(3)});
+    document.querySelector('#but4').addEventListener('click', function (){digitAdded(4)});
+    document.querySelector('#but5').addEventListener('click', function (){digitAdded(5)});
+    document.querySelector('#but6').addEventListener('click', function (){digitAdded(6)});
+    document.querySelector('#but7').addEventListener('click', function (){digitAdded(7)});
+    document.querySelector('#but8').addEventListener('click', function (){digitAdded(8)});
+    document.querySelector('#but9').addEventListener('click', function (){digitAdded(9)});
+
+    document.querySelector('#plusbut').addEventListener('click', function (){operatorSelected('+')});
+    document.querySelector('#minusbut').addEventListener('click', function (){operatorSelected('-')});
+    document.querySelector('#divbut').addEventListener('click', function (){operatorSelected('÷')});
+    document.querySelector('#multbut').addEventListener('click', function (){operatorSelected('x')});
+
+    document.querySelector('#clearbut').addEventListener('click', clearInput);
+    document.querySelector('#equalbut').addEventListener('click', operate);
+
+  </script>
+
+</html>
